@@ -1,0 +1,16 @@
+#app-header {
+    background-color: #3c275a;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h3 {
+    background-color: #3c275a;
+    color: #fff;
+    padding: 20px;
+}
+
+ul {
+    border: dotted 1px red;
+}
