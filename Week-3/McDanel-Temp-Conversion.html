@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html>
+        <title>WEB 231 – Enterprise JavaScript I</title>
+
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="McDanel-Temp-Conversion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <body>
+    
+    <h1 app-header>Welcome to the Temperature Conversion App!</h1>
+    <div class="card">
+        <div class="card-title">Fahrenheit to Celsius Converter</div>
+            <div class="card-content">
+                <div class="form-field">
+
+      <label>Fahrenheit Value</label>
+      <input id="txtFahrenheit" type="text" placeholder="Fahrenheit" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+               
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary full-width" id="btnSubmit">Convert Temperature</button>
+
+// This code almost works. It was borrowed from W3Schools.
+// I tried for a long time to modify it so the results displayed when the button is clicked.
+// Every resource I found does it differently. Now I'm just confused. SOS.
+
+<script>
+    function temperatureConverter(valNum){
+    valNum = parseFloat(valNum);
+    document.getElementById("outputCelcius").innerHTML=(valNum-32)/1.8;
+    }
+</script>
+
+<div class="card">
+    <div class="card-title">Conversion Results:</div>
+        <div class="card-content">
+         <p><span id="outputCelcius"></span></p>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("outputCelcius").innerHTML
+</script>
+
+<br><br>
+<a href="https://sowdapop.github.io/web-231/Week-1/index.html" class="return-home">Return</a>
+    
+</body>
+</html>
+    
