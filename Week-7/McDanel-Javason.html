@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+    
+    <title>WEB 231 – Enterprise JavaScript I</title>
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="McDanel-Javason.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<body>
+    <div id="container">
+        <h1 class="app-header">Welcome to Javazon App!</h1>
+        <div id="form">
+            <!--This is the card where books or authors are selected-->
+        <div class="card">
+            <div class="card-title">Javazon Selection Form</div>
+            <div class="card-content">
+                <div class="form">
+                    <div class="form-field">
+                        <label for="sequence">Choose a Listing:</label>
+                        <select class="drop-down-menu" id="listing">
+                            <option value="select">--Select--</option>
+                            <option value="products">Products</option>
+                            <option value="services">Services</option>
+                            <option value="employees">Employees</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-field">
+                        <button type="button" class="btn btn-primary full-width" id="btnDisplayListing">Display Listing</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="return-home" href="../index.html">Return</a>
+        </div>
+
+        <!--This displays the products table-->
+        <div id="products-div">
+        <div id="form-results">
+            <div class="card">
+                <div class="card-title">Javazon Products</div>
+                <div id="results">
+                    <table id="products-table">
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total Value</th>
+                            </tr>
+
+                        </thead>
+                        <tbody id="products-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+       </div>
+    </div>
+<!--This displays the services table-->
+    <div id="services-div">
+        <div id="form-results">
+            <div class="card">
+                <div class="card-title">Javazon Services</div>
+                <div id="results">
+                    <table id="services-table">
+                        <thead>
+                            <tr>
+                                <th>Service ID</th>
+                                <th>Description</th>
+                                <th>Hourly Rates</th>
+                                <th>Minimum Billable Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody id="services-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+       </div>
+    </div>
+<!--This displays the employees table-->
+    <div id="employees-div">
+        <div id="form-results">
+            <div class="card">
+                <div class="card-title">Javazon Employees</div>
+                <div id="results">
+                    <table id="employees-table">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employees-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+       </div>
+    </div>
+    
+
+    
+
+    </div>
+
+    <!--JavaScript functions-->
+    <script>
+        //This establishes the parameters of the class product 
+        class Product {
+            constructor (id, description, price, quantity){
+                this.id = id;
+                this.description = description;
+                this.price = price;
+                this.quantity = quantity;
+                this.totalValue = price * quantity;
+            }
+        }
+//This establishes product object
+        var product01 = new Product(0981489044, 'Riding Freedom', 21.99, 2);
+        var product02 = new Product(1420870009, 'Alone to Think', 32.54, 3);
+        var product03 = new Product(0310344069, 'Star Struck', 42.22, 5);
+        var product04 = new Product(0798431548, 'Help, I am alive', 12.57, 2);
+        var product05 = new Product(1675438916, 'Why', 35.09, 1);
+
+        console.log(product01)
+        console.log(product02)
+        console.log(product03)
+        console.log(product04)
+        console.log(product05)
+
+        let productData = [
+            {product01 },
+            {product02 },
+            {product03 },
+            {product04 },
+            {product05 }
+
+        ]
+        buildProductTable(productData)
+
+        function buildProductTable(data) {
+            var table = document.getElementById('products-table-body')
+
+                var row =  `<tr>
+                               <td>${product01.id}</td>
+                               <td>${product01.description}</td>
+                               <td>${product01.price}</td>
+                               <td>${product01.quantity}</td>
+                               <td>${product01.totalValue}</td>
+                            </tr>
+                            <tr>
+                               <td>${product02.id}</td>
+                               <td>${product02.description}</td>
+                               <td>${product02.price}</td>
+                               <td>${product02.quantity}</td>
+                               <td>${product02.totalValue}</td>
+                            </tr>
+                            <tr>
+                               <td>${product03.id}</td>
+                               <td>${product03.description}</td>
+                               <td>${product03.price}</td>
+                               <td>${product03.quantity}</td>
+                               <td>${product03.totalValue}</td>
+                            </tr>
+                            <tr>
+                               <td>${product04.id}</td>
+                               <td>${product05.description}</td>
+                               <td>${product05.price}</td>
+                               <td>${product05.quantity}</td>
+                               <td>${product05.totalValue}</td>
+                            </tr>`;
+                            
+                table.innerHTML +=row
+            }
+           
+        
+
+
+//This establishes the parameters of the class services 
+        class Services {
+            constructor(id, description, hourlyRate, min){
+                this.id = id;
+                this.description = description;
+                this.hourlyRate = hourlyRate;
+                this.min = min;
+            }
+        }
+//This establishes services object
+        var services01 = new Services(001, 'Web Design', 100.00, 10);
+        var services02 = new Services(002, 'Graphic Design', 100.00, 15);
+        var services03 = new Services(003, 'WebDev', 150.00, 12);
+
+        let serviceData = [
+            {services01},
+            {services02},
+            {services03},
+        ]
+
+        buildServiceTable(serviceData)
+//This function builds a section of table
+        function buildServiceTable(data) {
+            var table = document.getElementById('services-table-body')
+
+                var row =  `<tr>
+                               <td>${services01.id}</td>
+                               <td>${services01.description}</td>
+                               <td>${services01.hourlyRate}</td>
+                               <td>${services01.min}</td>
+                            </tr>
+                            <tr>
+                               <td>${services02.id}</td>
+                               <td>${services02.description}</td>
+                               <td>${services02.hourlyRate}</td>
+                               <td>${services02.min}</td>
+                            </tr>
+                            <tr>
+                               <td>${services03.id}</td>
+                               <td>${services03.description}</td>
+                               <td>${services03.hourlyRate}</td>
+                               <td>${services03.min}</td>
+                            </tr>
+                            `;
+                            
+                table.innerHTML +=row
+            }
+
+
+//This establishes the parameters of the class employee 
+        class Employee {
+            constructor(id, firstName, lastName, salary){
+                this.id = id;
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.salary = salary;
+            }
+        }
+        //This establishes employee object
+        var employee01 = new Employee(1001, 'Sinatra', 'Frank', 16.50);
+        var employee02 = new Employee(1002, 'Martin', 'Dean', 18.03);
+        var employee03 = new Employee(1003, 'Davis', 'Samuel', 20.00);
+        var employee04 = new Employee(1004, 'Darren', 'Robert', 20.05);
+        var employee05 = new Employee(1005, 'Astair', 'Fred', 17.20);
+
+        let employeeData = [
+            {employee01},
+            {employee02},
+            {employee03},
+            {employee04},
+            {employee05},
+        ]
+
+        buildEmployeeTable(employeeData)
+//This function builds a section of table
+        function buildEmployeeTable(data) {
+            var table = document.getElementById('employees-table-body')
+
+                var row =  `<tr>
+                               <td>${employee01.id}</td>
+                               <td>${employee01.firstName}</td>
+                               <td>${employee01.lastName}</td>
+                               <td>${employee01.salary}</td>
+                            </tr>
+                            <tr>
+                               <td>${employee02.id}</td>
+                               <td>${employee02.firstName}</td>
+                               <td>${employee02.lastName}</td>
+                               <td>${employee02.salary}</td>
+                            </tr>
+                            <tr>
+                               <td>${employee03.id}</td>
+                               <td>${employee03.firstName}</td>
+                               <td>${employee03.lastName}</td>
+                               <td>${employee03.salary}</td>
+                            </tr>
+                            <tr>
+                               <td>${employee04.id}</td>
+                               <td>${employee04.firstName}</td>
+                               <td>${employee04.lastName}</td>
+                               <td>${employee04.salary}</td>
+                            </tr>
+                            <tr>
+                               <td>${employee05.id}</td>
+                               <td>${employee05.firstName}</td>
+                               <td>${employee05.lastName}</td>
+                               <td>${employee05.salary}</td>
+                            </tr>
+                            `;
+                            
+                table.innerHTML +=row
+            }
+
+
+        
+
+
+
+        let products = document.getElementById("products-div");
+        let services = document.getElementById("services-div");
+        let employees = document.getElementById("employees-div");
+
+        products.style.display = "none";
+        services.style.display = "none";
+        employees.style.display = "none";
+//onclick function
+        document.getElementById("btnDisplayListing").onclick = function(){
+            var choice = document.getElementById("listing").value; 
+            switch (choice) {
+                case "products":
+                     products.style.display = "block";
+                     services.style.display = "none";
+                     employees.style.display = "none";
+                     break;
+                case "services":
+                     products.style.display = "none";
+                     services.style.display = "block";
+                     employees.style.display = "none";
+                     break;
+                case "employees":
+                    products.style.display = "none";
+                     services.style.display = "none";
+                     employees.style.display = "block";
+                     break;
+                
+                default:
+                    products.style.display = "none";
+                     services.style.display = "none";
+                     employees.style.display = "none";
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
