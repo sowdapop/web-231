@@ -1,0 +1,30 @@
+h1 {
+    font-weight: 400;
+    text-align: center;
+}
+
+
+#container {
+    padding: 10px;
+}
+
+#form {
+    width: 600px;
+    margin: 3% auto 0;
+}
+
+#form-results {
+    width: 600px;
+    margin: 3% auto 0 ;
+}
+
+#results {
+    text-align: center;
+    font-size: 28px;
+    padding: 15px;
+}
+
+#letter-results{
+    text-align: center;
+    font-size: 28px;
+}
