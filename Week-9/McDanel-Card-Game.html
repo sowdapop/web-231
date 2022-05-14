@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+    Kayla McDanel
+    Assignment 9 - Card Game
+    References:
+    The Definitive Guide to JavaScript
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
+-->
+<html>
+    <head>
+    <title>WEB 231 – Enterprise JavaScript I</title>
+    <link rel="stylesheet" type="text/css" href="global.css">
+    <link rel="stylesheet" type="text/css" href="McDanel-Card-Game.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
+    </head>
+
+<body>
+<!--Main application container-->
+    <div id="container">
+        <h1 class="app-header">Welcome to the Card Game!</h1>
+        <div id="form">
+         <!--This is the card that hosts the shuffle button-->
+        <div class="card">
+            <div class="card-title">Card Dealer</div>
+            <div class="card-content">
+                    <!--This is the shuffle button-->
+                        <button type="button" class="btn btn-primary full-width" id="btnDealCards">Deal Cards</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+     <!--Results display-->
+        <div class="form-results">
+             <div class="card">
+                <div class="card-title">Shuffled Cards</div>
+                    <div id="player-card-container">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="return-home" href="../index.html">Return</a>
+
+<!--JavaScript-->
+
+<script>
+
+//Card & dealer classes
+class Card {
+        constructor(face, suit) {
+          (this.face = face), (this.suit = suit);
+        }
+      }
+      class Dealer {
+        constructor() {
+          this.getDeckOfCards();
+        }
+
+//Declarations for arrays for cards
+CARD_COUNT = 52;
+        cards = [];
+        faces = [
+          'A',
+          '2',
+          '3',
+          '4',
+          '5',
+          '6',
+          '7',
+          '8',
+          '9',
+          '10',
+          'J',
+          'Q',
+          'K',
+        ];
+        suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+
+//Builds the deck of cards with faces and suits
+getDeckOfCards() {
+    for (let count = 0; count < this.CARD_COUNT; count++) {
+        this.cards[count] = new Card(
+            this.faces[count % 13], 
+            this.suits[Math.floor(count / 13)]
+            );
+    }
+}   
+
+//Shuffles the cards
+shuffle() {
+    for (let count = 0; count < this.CARD_COUNT; count++) {
+        let secondCard = Math.floor(Math.random() * this.CARD_COUNT);
+
+        let tempCard = this.cards[count];
+        this.cards[count] = this.cards[secondCard];
+        this.cards[secondCard] = tempCard;
+        }
+    }
+}
+
+//Card display
+function buildPlayingCard(card, suitIcon, faceColor, suitColor) {
+        return `
+        <div class="card ">
+          <div class="card-title" style="text-align:left; font-size:20px;padding-left:10px;color:${faceColor}">${card.face}
+            
+            <div class="card-content player-card" style="font-size:28px; padding-bottom:25px;">
+              <span class="${suitIcon}" style="color:${suitColor}"></span>
+              </div>
+            </div>
+          </div>`;
+      }
+
+//Onclick function to display cards
+document.getElementById('btnDealCards').onclick = function () {
+        let dealer = new Dealer();
+        dealer.shuffle();
+        let cardOutPutWithIcon = '';
+
+//Matching suits, icons, colors
+for (card of dealer.cards) {
+          switch (card.suit) {
+            case 'Hearts':
+              cardOutPutWithIcon += buildPlayingCard(
+                card,
+                'mdi mdi-cards-heart',
+                'red',
+                'red'
+              );
+              break;
+            case 'Diamonds':
+              cardOutPutWithIcon += buildPlayingCard(
+                card,
+                'mdi mdi-cards-diamond',
+                'red',
+                'red'
+              );
+              break;
+            case 'Clubs':
+              cardOutPutWithIcon += buildPlayingCard(
+                card,
+                'mdi mdi-cards-club',
+                'black',
+                'black'
+              );
+              break;
+            case 'Spades':
+              cardOutPutWithIcon += buildPlayingCard(
+                card,
+                'mdi mdi-cards-spade',
+                'black',
+                'black'
+              );
+              break;
+            default:
+              console.log('default switched');
+          }
+        }
+        document.getElementById('player-card-container').innerHTML =
+          cardOutPutWithIcon;
+};
+
+
+</script>
+</body>
+</html>
